@@ -1,0 +1,2 @@
+perception_stack
+-DCATKIN_DEVEL_PREFIX=/home/kartik/shiro_ws/devel -DCMAKE_INSTALL_PREFIX=/home/kartik/shiro_ws/install -G Unix Makefiles

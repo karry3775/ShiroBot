@@ -1,0 +1,8 @@
+prefix=/home/kartik/shiro_ws/install
+
+Name: perception_stack
+Description: Description of perception_stack
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/kartik/shiro_ws/install/lib 
+Requires: 
