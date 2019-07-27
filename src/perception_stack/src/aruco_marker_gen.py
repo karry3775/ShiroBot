@@ -14,8 +14,8 @@ print(aruco_dict)
 
 #seocnd parameter is id
 #last parameter is total image size
-img = aruco.drawMarker(aruco_dict,2,700)
-cv2.imwrite("aruco_id_2.jpg",img)
+img = aruco.drawMarker(aruco_dict,2,500)
+cv2.imwrite("aruco_id_2_sm.jpg",img)
 
 cv2.imshow("frame",img)
 cv2.waitKey(0)

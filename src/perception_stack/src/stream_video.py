@@ -5,8 +5,12 @@ import cv2
 import urllib as ul
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
-
-url ="http://192.168.0.7:8080/shot.jpg" #this url you can get from the IP Webcam
+"""
+TASKS
+1. get video stream from the android phone
+2. do perspective transform and publish that image to /android_image topic
+"""
+url ="http://192.168.0.2:8080/shot.jpg" #this url you can get from the IP Webcam
 #create a publisher
 rospy.init_node("android_image_node",anonymous=True)
 pub = rospy.Publisher("/android_image",Image,queue_size=10)
@@ -21,8 +25,14 @@ while not rospy.is_shutdown():
     imgcv = cv2.imdecode(imgnp,-1)
     #display image
     # cv2.imshow('mobile_feed',imgcv)
+    #lets do the perpective transformation now
+    pts1 = np.float32([[320,70],[927,93],[105,630],[1105,650]])
+    pts2 = np.float32([[0,0],[600,0],[0,400],[600,400]])
+    matrix = cv2.getPerspectiveTransform(pts1,pts2)
+
+    result = cv2.warpPerspective(imgcv,matrix,(600,400))
     try:
-        msg_to_publish = CvBridge().cv2_to_imgmsg(imgcv)
+        msg_to_publish = CvBridge().cv2_to_imgmsg(result)
         pub.publish(msg_to_publish)
     except CvBridgeError as e:
         print(e)
