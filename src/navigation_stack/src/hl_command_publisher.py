@@ -15,7 +15,7 @@ cmd = control_msg()
 
 while not rospy.is_shutdown():
     v = 1.5
-    w = 9
+    w = 0
     cmd.data = [float(v),float(w)]
     cmd_pub.publish(cmd)
     rate.sleep()

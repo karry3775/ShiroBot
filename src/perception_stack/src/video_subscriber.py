@@ -7,6 +7,9 @@ from cv_bridge import CvBridge, CvBridgeError
 from cv2 import aruco
 import numpy as np
 import math as m
+import time
+
+tic = time.time()
 
 def change_pt(a):
     y = a[1]
@@ -60,7 +63,7 @@ def img_cb(msg):
             cv2.putText(frame,text,(10,50), font, 1,(255,255,255),2,cv2.LINE_AA)
 
             #publish the (x,y,theta) to /shiro_state topic
-            state_pub.publish([float(centerx),float(centery),float(theta)])
+            state_pub.publish([float(time.time()-tic),float(centerx),float(centery),float(theta)])
 
         frame = aruco.drawDetectedMarkers(frame,corners)
         cv2.imshow('frame',frame)

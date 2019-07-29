@@ -10,11 +10,10 @@ TASKS
 1. get video stream from the android phone
 2. do perspective transform and publish that image to /android_image topic
 """
-url ="http://192.168.0.2:8080/shot.jpg" #this url you can get from the IP Webcam
+url ="http://192.168.43.1:8080/shot.jpg" #this url you can get from the IP Webcam
 #create a publisher
 rospy.init_node("android_image_node",anonymous=True)
 pub = rospy.Publisher("/android_image",Image,queue_size=10)
-
 
 while not rospy.is_shutdown():
     #getting the reponse
