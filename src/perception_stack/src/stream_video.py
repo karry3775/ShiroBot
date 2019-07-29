@@ -27,10 +27,22 @@ while not rospy.is_shutdown():
     # cv2.imshow('mobile_feed',imgcv)
     #lets do the perpective transformation now
     pts1 = np.float32([[320,70],[927,93],[105,630],[1105,650]])
-    pts2 = np.float32([[0,0],[600,0],[0,400],[600,400]])
+    # pts2 = np.float32([[0,0],[600,0],[0,400],[600,400]])
+    """
+    Before calculating new image dimensions need to find out
+    the max width and max height
+    """
+    w1 = 927 - 320
+    w2 = 1105 - 105
+    h1 = 630 - 70
+    h2 = 650 - 93
+    maxw = max(w1,w2)
+    maxh = max(h1,h2)
+    pts2 = np.float32([[0,0],[maxw,0],[0,maxh],[maxw,maxh]])
     matrix = cv2.getPerspectiveTransform(pts1,pts2)
 
-    result = cv2.warpPerspective(imgcv,matrix,(600,400))
+    # result = cv2.warpPerspective(imgcv,matrix,(600,400))
+    result = cv2.warpPerspective(imgcv,matrix,(maxw,maxh))
     try:
         msg_to_publish = CvBridge().cv2_to_imgmsg(result)
         pub.publish(msg_to_publish)

@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="navigation_stack" type ="hl_command_publisher.py" name="hl_cmd_pub_node" output="screen"/>
+	<node pkg="navigation_stack" type ="arduino_nodemcu_interface.py" name ="arduino_nodemcu_interface_node" output="screen"/>
+</launch>
